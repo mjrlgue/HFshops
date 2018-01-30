@@ -1,8 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ShopsList from './ShopsList';
+import { fetchShops } from '../../actions/shopsActions';
 
 class ShopsPage extends React.Component {
+  componentDidMount() {
+    this.props.fetchShops();
+  }
   render() {
     return (
       <div>
@@ -15,7 +20,8 @@ class ShopsPage extends React.Component {
 }
 
 ShopsPage.propTypes = {
-  shops: React.PropTypes.array.isRequired
+  shops: PropTypes.array.isRequired,
+  fetchShops: PropTypes.func.isRequired
 }
 
 
@@ -25,4 +31,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(ShopsPage);
+export default connect(mapStateToProps, { fetchShops })(ShopsPage);

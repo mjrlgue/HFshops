@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function ShopsList({ shops })  {
   const emptyMessage = (
@@ -16,5 +17,5 @@ export default function ShopsList({ shops })  {
 }
 
 ShopsList.propTypes = {
-  shops: React.PropTypes.array.isRequired
+  shops: PropTypes.array.isRequired
 }
