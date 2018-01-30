@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ShopCard from './ShopCard';
 
 export default function ShopsList({ shops })  {
   const emptyMessage = (
@@ -7,7 +8,9 @@ export default function ShopsList({ shops })  {
   );
 
   const shopsList = (
-    <p>shops list goes here !</p>
+    <div className="ui four cards">
+      { shops.map(shop => <ShopCard shop={shop} key={shop._id} /> ) }
+    </div>
   );
   return (
     <div>

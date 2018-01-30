@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Match } from 'react-router';
 import ShopsPage from './components/shops/ShopsPage';
+import ShopsForm from './components/shops/ShopsForm';
 
 
 class App extends Component {
@@ -14,7 +15,8 @@ class App extends Component {
 
         </div>
 
-      <Match pattern="/shops" component={ShopsPage} />
+      <Match exactly pattern="/shops" component={ShopsPage} />
+      <Match pattern="/shops/new" component={ShopsForm} />
       </div>
     );
   }
