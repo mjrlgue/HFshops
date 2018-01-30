@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import ShopsList from './ShopsList';
 import { fetchShops } from '../../actions/shopsActions';
 
+
 class ShopsPage extends React.Component {
   componentDidMount() {
     this.props.fetchShops();
   }
+  
   render() {
     return (
       <div>

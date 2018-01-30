@@ -7,8 +7,16 @@ export default function ShopCard({ shop }) {
       <div className="content">
         <div className="header">{shop.name}</div>
       </div>
+
       <div className="image">
         <img src={shop.picture} alt={shop.name} />
+      </div>
+
+      <div className="extra content">
+        <div className="ui two buttons">
+          <div className="ui basic button green"><i className="thumbs outline up icon"></i>Like</div>
+          <div className="ui basic button red"><i className="thumbs outline down icon"></i>Dislike</div>
+        </div>
       </div>
     </div>
   );
