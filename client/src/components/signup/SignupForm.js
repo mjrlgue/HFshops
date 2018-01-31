@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import validateInput from '../../shared/validations/signup';
 import TextFieldGroup from '../common/TextFieldGroup';
- import { createBrowserHistory } from 'history/createBrowserHistory';
- import history from '../../history';
+import history from '../../history';
 
 class SignupForm extends React.Component {
 
@@ -37,10 +36,14 @@ class SignupForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    if (this.isValid()) {
-      this.setState({ errors: {}, isLoading: true });
-      this.props.userSignupRequest(this.state).then(
-        () => {
+    if(this.isValid()){
+        this.setState({ errors: {}, isLoading: true });
+        this.props.userSignupRequest(this.state)
+        .then(() => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'Signed up successfully. Welcome buddy !'
+          });
           history.push('/');
           window.location.reload();
         },
@@ -93,7 +96,8 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
 }
 
 SignupForm.contextTypes = {
