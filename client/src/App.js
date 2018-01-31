@@ -5,6 +5,7 @@ import ShopsForm from './components/shops/ShopsForm';
 import NavigationShops from './components/NavigationShops';
 import NavigationBar from './components/NavigationBar';
 import SignupPage from './components/signup/SignupPage';
+import FlashMessagesList from './components/flash/FlashMessagesList';
 
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
         <div className="ui container">
           <NavigationBar />
         </div>
+        <FlashMessagesList />
         <div className="ui three item menu">
           <Link className="item" activeClassName="active" to="/">Home</Link>
           <Link className="item" activeClassName="active" to="shops">Shops</Link>
