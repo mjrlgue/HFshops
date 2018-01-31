@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import validateInput from '../../shared/validations/signup';
 import TextFieldGroup from '../common/TextFieldGroup';
 
+import createBrowserHistory from 'history/createBrowserHistory';
+
 class SignupForm extends React.Component {
 
   constructor(props) {
@@ -38,7 +40,11 @@ class SignupForm extends React.Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state).then(
-        () => {},
+        () => {
+          const history = createBrowserHistory()
+          history.push('/');
+          window.location.reload();
+        },
         (err) => this.setState({ errors: err.response.data, isLoading: false })
       );
     }
@@ -89,6 +95,10 @@ class SignupForm extends React.Component {
 
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired
+}
+
+SignupForm.contextTypes = {
+  router: PropTypes.object.isRequired
 }
 
 export default SignupForm;
