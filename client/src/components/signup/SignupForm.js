@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import validateInput from '../../shared/validations/signup';
 import TextFieldGroup from '../common/TextFieldGroup';
 
-import createBrowserHistory from 'history/createBrowserHistory';
-
 class SignupForm extends React.Component {
 
   constructor(props) {
@@ -40,15 +38,7 @@ class SignupForm extends React.Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state).then(
-        () => {
-          this.props.addFlashMessage({
-            type: 'success',
-            text: 'Signed up successfully. Welcome buddy !'
-          });
-          const history = createBrowserHistory()
-          history.push('/');
-          window.location.reload();
-        },
+        () => {},
         (err) => this.setState({ errors: err.response.data, isLoading: false })
       );
     }
@@ -62,32 +52,32 @@ class SignupForm extends React.Component {
             onSubmit={this.onSubmit}>
         <h1>Join Shop buddy</h1>
 
+          <TextFieldGroup
+          error={errors.email}
+          label="email"
+          onChange={this.onChange}
+          checkUserExists={this.checkUserExists}
+          value={this.state.email}
+          field="email"
+        />
 
           <TextFieldGroup
-            error={errors.email}
-            label="email"
+            error={errors.password}
+            label="Password:"
             onChange={this.onChange}
-            value={this.state.email}
-            field="email"
+            value={this.state.password}
+            field="password"
+            type="password"
           />
 
             <TextFieldGroup
-              error={errors.password}
-              label="Password"
+              error={errors.passwordConfirmation}
+              label="Password Confirmation:"
               onChange={this.onChange}
-              value={this.state.password}
-              field="password"
+              value={this.state.passwordConfirmation}
+              field="passwordConfirmation"
               type="password"
             />
-
-              <TextFieldGroup
-                error={errors.passwordConfirmation}
-                label="Password Confirmation"
-                onChange={this.onChange}
-                value={this.state.passwordConfirmation}
-                field="passwordConfirmation"
-                type="password"
-              />
 
 
         <button className="ui button" type="submit" disabled={this.state.isLoading}>Sign up</button>
@@ -98,12 +88,7 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
-}
-
-SignupForm.contextTypes = {
-  router: PropTypes.object.isRequired
+  userSignupRequest: PropTypes.func.isRequired
 }
 
 export default SignupForm;
