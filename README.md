@@ -1,10 +1,10 @@
 # HFshops
-A simple app using react redux for HF coding challenge
+A simple app using react redux for HF coding challenge.
 
 # Installation
-```
-$ npm run dev
-```
+
+`$ npm install` and then `$ npm run dev`.
+
 
 # Configuration
 In `./backend/config` folder, create a new file `dev.js` and set it up, exemple:
@@ -20,6 +20,7 @@ and then to import keys from above:
 ```javascript
 const keys = require('../config/keys');
 ```
+For production, modify `./backend/config/prod.js` file with your proper variables.
 # Why you should fork this
 Well, you can add some awesome features using react component:
 1. Add pagination for listing shops, using [react-paginate](https://github.com/AdeleD/react-paginate) or `react-bootstrap`
