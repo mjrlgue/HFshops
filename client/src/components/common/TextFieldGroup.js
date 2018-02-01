@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 const TextFieldGroup = ({ field, value, label, error, type, onChange, checkUserExists }) => {
 
   return (
-    <div className={classnames("form-group",
+    <div className={classnames("ui form",
                     { 'has-error': error })}>
-      <label className="control-label">{label}</label>
+      <label>{label}</label>
       <input
         value={value}
         onChange={onChange}

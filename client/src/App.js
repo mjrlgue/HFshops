@@ -5,6 +5,7 @@ import ShopsForm from './components/shops/ShopsForm';
 import NavigationShops from './components/NavigationShops';
 import NavigationBar from './components/NavigationBar';
 import SignupPage from './components/signup/SignupPage';
+import LoginPage from './components/login/LoginPage';
 import FlashMessagesList from './components/flash/FlashMessagesList';
 
 
@@ -28,6 +29,7 @@ class App extends Component {
       <Match exactly pattern="/shops" component={ShopsPage} />
       <Match pattern="/shops/new" component={ShopsForm} />
       <Match exactly pattern="/signup" component={SignupPage} />
+      <Match exactly pattern="/login" component={LoginPage} />
       </div>
     );
   }

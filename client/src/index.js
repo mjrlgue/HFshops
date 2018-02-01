@@ -9,8 +9,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import history from './history';
+import LoginPage from './components/login/LoginPage';
 
 const store = createStore(
   rootReducer,
@@ -25,7 +26,11 @@ ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <Router history={history}>
-        <App />
+        <App>
+          <Switch>
+            <Route exact path="/login" component={LoginPage} />
+          </Switch>
+  </App>
       </Router>
     </Provider>
   </BrowserRouter>,

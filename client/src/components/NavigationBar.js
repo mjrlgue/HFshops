@@ -12,7 +12,9 @@ export default () => {
         </button>
       </div>
       <div className="item">
-        <div className="ui button">Log-in</div>
+        <button className="ui small white button ">
+          <Link to="/login" className="primary">Signup</Link>
+        </button>
       </div>
     </div>
   );
