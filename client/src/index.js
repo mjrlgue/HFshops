@@ -12,6 +12,9 @@ import { BrowserRouter } from 'react-router';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import LoginPage from './components/login/LoginPage';
+import setAuthorizationToken from './utils/setAuthorizationToken';
+import jwt from 'jsonwebtoken';
+import { setCurrentUser } from './actions/authActions';
 
 const store = createStore(
   rootReducer,
@@ -22,12 +25,19 @@ const store = createStore(
   )
 );
 
+//save isAuthenticated in redux store
+if (localStorage.jwtToken) {
+  setAuthorizationToken(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)))
+}
+
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <Router history={history}>
         <App>
           <Switch>
+            <Route exact path="/" component={App} />
             <Route exact path="/login" component={LoginPage} />
           </Switch>
   </App>

@@ -1,3 +1,4 @@
-export const SET_SHOPS = 'SET_SHOPS';
-export const ADD_FLASH_MESSAGE = 'ADD_FLASH_MESSAGE';
+export const SET_SHOPS            = 'SET_SHOPS';
+export const ADD_FLASH_MESSAGE    = 'ADD_FLASH_MESSAGE';
 export const DELETE_FLASH_MESSAGE = 'DELETE_FLASH_MESSAGE';
+export const SET_CURRENT_USER     = 'DELETE_FLASH_MESSAGE';
