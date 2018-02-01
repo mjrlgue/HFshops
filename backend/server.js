@@ -25,6 +25,7 @@ mongodb.MongoClient.connect(dbUrl, function(err, db){
       //console.log({ shops });
     })
   });
-  app.listen(8080, () => console.log('Server running on localhost:8080...'));
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => console.log('Server running on localhost:'+PORT+'...'));
 
 });
