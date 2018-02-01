@@ -8,24 +8,41 @@ const Models = require('../helpers/user');
 
 let router = express.Router();
 
-
+function validateCredential(data, otherValidations) {
+  let { errors } = otherValidations(data);
+  return Models.user.find(
+  {email: data.email})
+ .then(user => {
+  if (user.length) {
+   if (user[0].email === data.email) {
+    errors.email = 'Email is already registered';
+    console.log('A user already exist with same credential !');
+   }
+  }
+  return {
+   errors,
+   isValid: isEmpty(errors)
+  }
+ });
+}
 
 router.post('/', (req, res) => {
-  const { errors, isValid } = validateInput(req.body);
-
-  if (isValid) {
-    const { email, password } = req.body;
-    const password_digest = bcrypt.hashSync(password, 10);
-    const User = new Models.user({
-      email: email,
-      password: password_digest
-    });
-    User.save()
-    .then(user => res.json({ success: true }), console.log('User added successfully !'), console.log('password is: '+ password_digest+'  crypted ^^'))
-    .catch(err => res.status(500).json({ error: err}));
-  } else {
-    res.status(400).json(errors);
-  }
+  validateCredential(req.body, validateInput).then(({ errors, isValid}) => {
+    if(isValid) {
+      //res.json({ success: true });
+      const { email, password } = req.body;
+      const password_digest = bcrypt.hashSync(password, 10);
+      const User = new Models.user({
+        email: email,
+        password: password_digest
+      });
+      User.save()
+      .then(user => res.json({ success: true }), console.log('User added successfully !'))
+      .catch(err => res.status(500).json({ error: err}));
+    } else {
+      res.status(400).json(errors);
+    }
+  });
 });
 
 export default router;
