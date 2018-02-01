@@ -8,6 +8,7 @@
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
     "history": "^4.7.2",
+    "jsonwebtoken": "^8.1.1",
     "lodash": "^4.17.4",
     "mongoose": "^5.0.2",
     "prop-types": "^15.6.0",

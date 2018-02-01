@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 import { SET_SHOPS } from './types';
 
 export function setShops(shops) {
@@ -12,8 +12,8 @@ export function setShops(shops) {
 export function fetchShops() {
 
   return dispatch => {
-    fetch('/api/shops')
-      .then(res => res.json())
-      .then(data => dispatch(setShops(data.shops)));
+    axios.get('/api/shops').then(response => {
+      return dispatch(setShops(response.data.shops));
+    });
   }
 }

@@ -13,7 +13,7 @@ export default () => {
       </div>
       <div className="item">
         <button className="ui small white button ">
-          <Link to="/login" className="primary">Signup</Link>
+          <Link to="/login" className="primary">Login</Link>
         </button>
       </div>
     </div>
