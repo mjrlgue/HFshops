@@ -23,7 +23,7 @@ class NavigationBar extends React.Component {
         </div>
         <div className="item">
           <button className="ui small white button ">
-            <a hred="#" className="primary" onClick={this.logout.bind(this)}>Logout</a>
+            <a href="#" className="primary" onClick={this.logout.bind(this)}>Logout</a>
           </button>
         </div>
       </div>
@@ -43,6 +43,7 @@ class NavigationBar extends React.Component {
         </div>
       </div>
       );
+
     return (
       <div>
         { isAuthenticated ? userLinks : guestLinks }
