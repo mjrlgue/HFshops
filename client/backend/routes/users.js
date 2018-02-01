@@ -26,6 +26,20 @@ function validateCredential(data, otherValidations) {
  });
 }
 
+router.get('/:identifier', (req, res) => {
+  console.log(req.params.identifier);
+    Models.user.find(
+  {email: req.params.identifier})
+ .then(user => {
+   if (user[0].email === req.params.identifier) {
+     res.json({ user });
+     console.log('User already exist !'+user);
+   } else {
+     res.end();
+   }
+ });
+});
+
 router.post('/', (req, res) => {
   validateCredential(req.body, validateInput).then(({ errors, isValid}) => {
     if(isValid) {

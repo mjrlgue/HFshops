@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import validateInput from '../../shared/validations/signup';
 import TextFieldGroup from '../common/TextFieldGroup';
 import history from '../../history';
+import isEmpty from 'lodash/isEmpty';
 
 class SignupForm extends React.Component {
 
@@ -14,11 +15,13 @@ class SignupForm extends React.Component {
       password: '',
       passwordConfirmation: '',
       errors: {},
-      isLoading: false
+      isLoading: false,
+      invalid: false
     }
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange        = this.onChange.bind(this);
+    this.onSubmit        = this.onSubmit.bind(this);
+    this.checkUserExists = this.checkUserExists.bind(this);
   }
 
   onChange(e) {
@@ -32,6 +35,25 @@ class SignupForm extends React.Component {
     this.setState({ errors });
   }
   return isValid;
+}
+
+checkUserExists(e) {
+  const field = e.target.name;
+   const val = e.target.value;
+   if (val !== '') {
+     this.props.isUserExists(val).then(res => {
+       let errors = this.state.errors;
+       let invalid;
+       if (res.data.user) {
+         errors[field] = 'There is user with such ' + field;
+         invalid = true;
+       } else {
+         delete errors[field];
+         invalid = false;
+       }
+       this.setState({ errors, invalid: !isEmpty(errors) });
+     });
+   }
 }
 
   onSubmit(e) {
@@ -88,7 +110,7 @@ class SignupForm extends React.Component {
             />
 
 
-        <button className="ui button" type="submit" disabled={this.state.isLoading}>Sign up</button>
+          <button className="ui button" type="submit" disabled={this.state.isLoading || this.state.invalid}>Sign up</button>
       </form>
       </div>
     );
@@ -97,7 +119,8 @@ class SignupForm extends React.Component {
 
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  addFlashMessage: PropTypes.func.isRequired,
+  isUserExists: PropTypes.func.isRequired
 }
 
 SignupForm.contextTypes = {
